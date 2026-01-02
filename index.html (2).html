@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Звіт інструкторів</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --panel: #111622;
+      --panel-border: #1e2540;
+      --accent: #6a7cff;
+      --accent-soft: rgba(106,124,255,.15);
+      --text: #e6e9ff;
+      --muted: #9aa3c7;
+      --danger: #ff6a6a;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: radial-gradient(1200px 600px at 50% -200px, #141a33 0%, var(--bg) 60%);
+      color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 40px auto 80px;
+      padding: 0 16px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 34px;
+      letter-spacing: 2px;
+      color: var(--accent);
+    }
+
+    header p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0)) , var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 0 1px rgba(106,124,255,.05), 0 10px 30px rgba(0,0,0,.45);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: #0c1020;
+      border: 1px solid var(--panel-border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--text);
+      outline: none;
+      transition: .2s ease;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #6f78a8;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-soft);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .radio {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    .participants {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .participants span {
+      grid-column: 1 / -1;
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    .upload {
+      border: 1px dashed var(--panel-border);
+      border-radius: 14px;
+      padding: 26px;
+      text-align: center;
+      color: var(--muted);
+      background: #0c1020;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 24px;
+    }
+
+    button {
+      background: linear-gradient(135deg, #6a7cff, #8b9bff);
+      border: none;
+      border-radius: 12px;
+      padding: 12px 22px;
+      color: #0b0e14;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 10px 30px rgba(106,124,255,.35);
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 36px rgba(106,124,255,.45);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <p style="color: var(--muted); font-size:14px; text-align:center; margin-bottom:28px;">Звіт інструкторів • внутрішня система обліку</p>
+
+    <form id="reportForm">
+      <!-- Основні дані -->
+      <div class="card">
+        <div class="card-title">📌 Основні дані</div>
+        <div class="grid">
+          <div>
+            <label>Нікнейм</label>
+            <input id="nickname" type="text" placeholder="Введіть нікнейм" />
+          </div>
+          <div>
+            <label>Static ID</label>
+            <input id="staticId" type="text" placeholder="Static ID" />
+          </div>
+          <div>
+            <label>Звання</label>
+            <select id="rank">
+              <option>Senior Agent 4️⃣</option>
+              <option>Inspector 5️⃣</option>
+              <option>Secret Agent 6️⃣</option>
+              <option>Special Agent 7️⃣</option>
+              <option>Free Agent 8️⃣</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Посилання на проведені заходи -->
+      <div class="card">
+        <div class="card-title">🔗 Посилання на проведені заходи</div>
+        <div class="grid">
+          <div><label>Прийняті іспити</label><input id="exams" type="url" placeholder="https://" /></div>
+          <div><label>Проведені практики</label><input id="practice" type="url" placeholder="https://" /></div>
+          <div><label>Проведені тренування</label><input id="training" type="url" placeholder="https://" /></div>
+          <div><label>Проведені лекції</label><input id="lectures" type="url" placeholder="https://" /></div>
+          <div><label>Затримання осіб</label><input id="detentions" type="url" placeholder="https://" /></div>
+          <div><label>ГРП</label><input id="grp" type="url" placeholder="https://" /></div>
+          <div><label>ВЗХ</label><input id="vzh" type="url" placeholder="https://" /></div>
+          <div><label>Участь у постачанні</label><input id="supply" type="url" placeholder="https://" /></div>
+          <div><label>Відбиття ФЗ</label><input id="counter" type="url" placeholder="https://" /></div>
+        </div>
+      </div>
+
+      <!-- Додаткова інформація -->
+      <div class="card">
+        <div class="card-title">📝 Додаткова інформація</div>
+        <label>Опис / коментар</label>
+        <textarea id="comment" placeholder="Вкажіть важливі деталі..."></textarea>
+      </div>
+
+      
+
+      <div class="actions">
+        <button type="submit">Надіслати звіт</button>
+      </div>
+    </form>
+
+    <footer>
+      © Internal System • Dark UI
+    </footer>
+  </div>
+
+<script>
+const WEBHOOK_URL = "https://discord.com/api/webhooks/1455532545574965355/zjzoKlM13iDJWNiSt8E0bufFMPXMFc3h5Wgl3Dj-1SZvL7xuadDFVHBxAzOsEUfTaW8M";
+
+// 🔧 Налаштування Discord Webhook (НЕ відображається на сайті)
+const WEBHOOK_NAME = "Document FIB"; // нік webhook
+const WEBHOOK_AVATAR = "https://cdn.imgpile.com/f/vKW6n98_xl.png"; // URL аватара (залиш порожнім якщо не треба)
+
+document.getElementById('reportForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const data = {
+    nickname: nickname.value,
+    staticId: staticId.value,
+    rank: rank.value,
+    exams: exams.value,
+    practice: practice.value,
+    training: training.value,
+    lectures: lectures.value,
+    detentions: detentions.value,
+    grp: grp.value,
+    vzh: vzh.value,
+    supply: supply.value,
+    counter: counter.value,
+    comment: comment.value
+  };
+
+  const content = {
+    username: WEBHOOK_NAME,
+    avatar_url: WEBHOOK_AVATAR || undefined,
+    embeds: [{
+      title: "📄 Новий звіт інструктора",
+      color: 0x6a7cff,
+      fields: [
+        { name: "Нікнейм", value: data.nickname || "—", inline: true },
+        { name: "Static ID", value: data.staticId || "—", inline: true },
+        { name: "Звання", value: data.rank || "—", inline: false },
+        { name: "Прийняті іспити", value: data.exams || "—" },
+        { name: "Практики", value: data.practice || "—" },
+        { name: "Тренування", value: data.training || "—" },
+        { name: "Лекції", value: data.lectures || "—" },
+        { name: "Затримання", value: data.detentions || "—" },
+        { name: "ГРП", value: data.grp || "—" },
+        { name: "ВЗХ", value: data.vzh || "—" },
+        { name: "Постачання", value: data.supply || "—" },
+        { name: "Відбиття ФЗ", value: data.counter || "—" },
+        { name: "Коментар", value: data.comment || "—" }
+      ],
+      footer: { text: "Internal Report System" },
+      timestamp: new Date()
+    }]
+  };
+
+  await fetch(WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(content)
+  });
+
+  alert('✅ Звіт успішно відправлено в Discord');
+  e.target.reset();
+});
+</script>
+</body>
+</html>
